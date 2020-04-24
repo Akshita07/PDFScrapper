@@ -1,0 +1,42 @@
+{% extends 'scrapper/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+    <div class="container" align="center">
+
+        <div class="row" align="center">
+            <div class="col-lg-12">
+                <form action = "{% url 'index' %}" method="POST">
+                {% csrf_token %}
+                    <input type="submit" class="btn btn-outline-success" value="Go To Index"/>
+                </form>
+            </div>
+        </div>
+
+        <div class="row" align="center">
+            <input type="hidden">
+        </div>
+
+        <div class="info-group col-lg-10 rounded" align="center">
+            <table style="width:100%" cellpadding="10">
+            <tr>
+                {% for data in data_frame %}
+                    <th>{{ data }}</th>
+                {% endfor %}
+
+
+                {% for _, record in data_frame.iterrows %}
+                    <tr>
+                        {% for value in record %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}
